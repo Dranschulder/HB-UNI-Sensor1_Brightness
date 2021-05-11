@@ -1,4 +1,2 @@
-# HB-UNI-Sensor1_T1-T2-P-H-L
-Sensor for Temperature1, Temperature2, AirPressure, Humidity, Lux
-
-"CustomData" überträgt den zweiten Temperaturkanal (vom DS18X20)
+# HB-UNI-Sensor1_T1-H-L
+Sensor for Temperature, Humidity, Lux
