@@ -42,7 +42,7 @@
 // - Clock Definition
 // - Schaltungsvariante und Pins für Batteriespannungsmessung
 // - Schwellwerte für Batteriespannungsmessung
-#include "device_brightness.h"
+#include "device_temperature.h"
 
 
 // number of available peers per channel
@@ -328,8 +328,8 @@ public:
         digitalInput.disableINT();    // digitalInput Interrupt abschalten, dieser könnte beim Senden ausgelöst werden (bei PIR aufgetreten)
 #endif
         measure();
-        if( brightness100>0 ) // nur senden, wenn Helligkeit > 0
-        {
+        //if( brightness100>0 ) // nur senden, wenn Helligkeit > 0
+        //{
             uint8_t msgcnt = device().nextcount();
             msg.init(msgcnt, temperature10, airPressure10, humidity, brightness100, digInputState, batteryVoltage, device().battery().low(), customData);
             if (msg.flags() & Message::BCAST) {
@@ -337,7 +337,7 @@ public:
             } else {
                 device().sendPeerEvent(msg, *this);
             }
-        }
+        //}
         // reactivate for next measure
         uint16_t updCycle = this->device().getList0().updIntervall();
         set(seconds2ticks(updCycle));
@@ -396,8 +396,7 @@ public:
 // Falls DS18X20 vorhanden, dessen Temp der BME280/BMP180 Temp vorziehen
 #ifdef SENSOR_DS18X20
         Sens_DS18X20::measure(ds18x20, ds18x20Count);
-        // "temperature10" wird schon für BMW280-Temperaturmessung benutzt. Deshalb Reserve-Daten für DS18x20 verwenden
-        /*temperature10*/ customData = ds18x20[0].temperature();
+        temperature10 = ds18x20[0].temperature();
         // Beispiel: Hier sind alle DS18B20 Temperaturen im Array falls mehrere DS18B20 an einem Pin/Bus verwendet werden
         // Dafür muss DS18X20_COUNT in der Konfigurationsdatei angepasst werden!
         // for (uint8_t i = 0; i < DS18X20_COUNT; i++) {
