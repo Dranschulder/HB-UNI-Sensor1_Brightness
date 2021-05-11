@@ -42,7 +42,8 @@
 // - Clock Definition
 // - Schaltungsvariante und Pins für Batteriespannungsmessung
 // - Schwellwerte für Batteriespannungsmessung
-#include "device_brightness_temperature.h"
+//#include "device_brightness_temperature.h" //JQu
+#include "device_temperature.h" //MK: nur Temperatur
 
 
 // number of available peers per channel
